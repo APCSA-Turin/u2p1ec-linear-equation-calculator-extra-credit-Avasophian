@@ -1,3 +1,8 @@
+/*
+ * coder : Sophie
+ * 10/22/24
+*/
+
 package com.example.project;
 public class LinearCalculator
 {
@@ -41,13 +46,13 @@ public class LinearCalculator
     public void setY2(int newy2){y2 = newy2;}
 
     
-    //returns x2 - x1
+    //returns x2 - x1, which is the distance between the x coordinates
     public double xDistance()
     {
         return x2-x1;
     }
 
-    //returns y2 - y1
+    //returns y2 - y1, which is the distance between the x coordinates
     public double yDistance()
     {
         return y2-y1;
@@ -64,14 +69,14 @@ public class LinearCalculator
 
     //yInt() -> returns a double.
     //calculates the y intercept of the equation and returns the value to the nearest HUNDREDTH
-    //if y-int if undefined, should return -999.99
+    //if y-int if undefined, returns -999.99
     public double yInt()
     {
-        if (slope() == -999.99)
+        if (slope() == -999.99) // if the slope is undefined, it never touches the y axis because itll just be a straight line.
         {
             return -999.99;
         }
-        double yIntercept = (y1 - (slope() * x1));
+        double yIntercept = (y1 - (slope() * x1)); // isdolates b from y = mx + b to get b = y - mx
         yIntercept = roundedToHundredth(yIntercept);
         return yIntercept;
     }
@@ -81,7 +86,7 @@ public class LinearCalculator
     //if slope is undefined, should return -999.99
     public double slope()
     {
-        if (xDistance() == 0)
+        if (xDistance() == 0) //because a denominator of 0 means it is an undefined value
         {
             return -999.99;
         }
@@ -99,16 +104,16 @@ public class LinearCalculator
         }
         else if (yInt() == 0)
         {
-           return "y=" + slope() + "x";
+           return "y=" + slope() + "x"; //since y intercept is 0 in this case it doesnt print the y intercept to make it more organized
         }
         else if (slope() == 0)
         {
-            return "y=" + yInt();
+            return "y=" + yInt(); //since slope is 0 it is just a straight line so no need to print the slope
         }
 
         if (yInt() < 0)
         {
-            return "y=" + slope() + "x" + yInt(); 
+            return "y=" + slope() + "x" + yInt(); //doesnt add the plus to avoid somethign like y = 12x + -15.
         }
         return "y=" + slope() + "x+" + yInt();
     }
@@ -118,7 +123,7 @@ public class LinearCalculator
     //calculates the input to the nearest hundredth and returns that value
     public double roundedToHundredth(double x){
         // source https://www.geeksforgeeks.org/java-program-to-round-a-number-to-n-decimal-places/ we luv geeksforgeeks
-        return Math.round(x * 100.0)/100.0;
+        return Math.round(x * 100.0)/100.0; 
     }
 
 
@@ -146,19 +151,19 @@ public class LinearCalculator
     //return "Symmetric about the origin";
     //return "No symmetry";
     public String findSymmetry(){
-        if (x1 == x2/-1 && y1 == y2/-1)
+        if (x1 == x2/-1 && y1 == y2/-1) // This checks if x, y = -x, -y
         {
             return "Symmetric about the origin";
         }
-        else if (x1 == x2/-1)
+        else if (x1 == x2/-1) // This checks if x = -x
         {
             return "Symmetric about the y-axis";
         }
-        else if (y1 == y2/-1)
+        else if (y1 == y2/-1) // This checks if y = -y
         {
             return "Symmetric about the x-axis";
         }
-        else
+        else // If 2 points meet none of the above functions, they are not symmetrical
         {
             return "No symmetry";
         }
@@ -168,7 +173,7 @@ public class LinearCalculator
     //the method should calculate the midpoint between the two points
     //it should return "The midpoint of this line is: (0,0)";
     public String Midpoint(){
-        double midpointxValue = (x1+x2)/2;
+        double midpointxValue = (x1+x2)/2; //The midpoint formula is ((x1+x2)/2, (y1+y2)/2)
         double midpointyValue = (y1+y2)/2;
         return "The midpoint of this line is: (" + midpointxValue + "," + midpointyValue + ")";
     }
